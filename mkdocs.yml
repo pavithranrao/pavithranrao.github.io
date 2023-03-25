@@ -1,0 +1,17 @@
+site_name: Pavi's Digital Garden
+repo_url: https://github.com/pavithranrao
+theme:
+  name: material
+  font: Fira Code
+  palette:
+    primary: indigo
+    accent: blue
+  icon:
+    repo: fontawesome/brands/git-alt 
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+
+plugins:
+  - search:
+      lang: en
