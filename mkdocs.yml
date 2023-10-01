@@ -6,7 +6,6 @@ theme:
   palette:
     primary: indigo
     accent: blue
-    scheme: slate
   icon:
     repo: fontawesome/brands/git-alt 
   features:
