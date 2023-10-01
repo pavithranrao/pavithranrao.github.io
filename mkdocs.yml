@@ -1,7 +1,7 @@
 site_name: Pavi's Digital Garden
 repo_url: https://github.com/pavithranrao
 theme:
-  name: material
+  name: dracula
   font: Fira Code
   palette:
     primary: indigo
