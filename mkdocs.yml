@@ -5,6 +5,7 @@ theme:
     - navigation.tabs
     - navigation.sections
     - toc.integrate
+    - toc.follow
     - navigation.top
     - search.suggest
     - search.highlight
@@ -13,15 +14,18 @@ theme:
     - content.code.copy
   language: en
   palette:
-    - scheme: default
+      # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
       toggle:
-        icon: material/toggle-switch-off-outline 
+        icon: material/brightness-4
         name: Switch to dark mode
       primary: deep purple
-      accent: indigo 
-    - scheme: slate 
+      accent: indigo
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate 
       toggle:
-        icon: material/toggle-switch
+        icon: material/brightness-7
         name: Switch to light mode    
       primary: deep purple
       accent: indigo

@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "pavithranrao-github-io"
+version = "0.1.0"
+description = ""
+authors = ["Pavithran Ramachandran <pavithran38@pec.edu>"]
+readme = "README.md"
+packages = [{include = "pavithranrao"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+mkdocs-material = "^9.5.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
