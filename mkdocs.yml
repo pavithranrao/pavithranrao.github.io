@@ -2,9 +2,8 @@ site_name: Pavi's Digital Garden
 theme:
   name: material
   features:
-    - navigation.tabs
     - navigation.sections
-    - toc.integrate
+    - navigation.path
     - toc.follow
     - navigation.top
     - search.suggest
@@ -29,6 +28,8 @@ theme:
         name: Switch to light mode    
       primary: deep purple
       accent: indigo
+  favicon: assets/favicon.png
+  logo: assets/favicon.png
 
 plugins:
   - social
