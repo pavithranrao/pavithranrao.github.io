@@ -41,6 +41,8 @@ extra:
       link: https://github.com/pavithranrao
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/in/pavithran-ramachandran-9042aaa1/
+    - icon: fontawesome/brands/stack-overflow
+      link: https://stackoverflow.com/users/7991002/pavithran-ramachandran
     
     
 markdown_extensions:
