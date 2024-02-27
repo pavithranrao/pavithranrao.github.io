@@ -219,6 +219,148 @@ Source: https://en.cppreference.com/w/cpp/language/operator_logical
 - All built-in operators return bool, and most [user-defined overloads](https://en.cppreference.com/w/cpp/language/operators "cpp/language/operators") also return bool so that the user-defined operators can be used in the same manner as the built-ins. However, in a user-defined operator overload, any type can be used as return type (including void).
 - Built-in operators `**&&**` and `**|**` perform short-circuit evaluation (do not evaluate the second operand if the result is known after evaluating the first), but overloaded operators behave like regular function calls and always evaluate both operands.
 
-## None vs nullptr
+## None vs `nullptr`
 
 Python's `None` is similar to C++ `nullptr`. C++ `nullptr` is also used to find end of an iterator whereas in Python the iterator terminates with an Exception.
+
+---
+
+## Lists, Iterators
+
+Python
+
+```python
+a = [1, 2, 3]
+reverse(a)  # [3, 2, 1]
+len(a)      # 3
+
+a.append(4)
+for x in a:
+	print(a)
+
+list_of_3_same_value_100 = [100] * 3
+
+a = [1, 2, 4, 5]
+a.insert(2, 3) # (index, value) # [1, 2, 3, 4, 5]
+
+
+# look at last element
+a[-1]  # 5
+a.pop() # 5 and `a` becomes [1, 2, 3, 4]
+
+```
+
+C++
+```cpp
+#include <vector>
+#include <algorithm>  # std::reverse
+
+std::vector<int> a = {1, 2, 3};
+
+// inplace reverse
+std::reverse(a.begin(), a.end()); // {3, 2, 1}
+
+a.push_back(4);
+
+for (auto x: a) {
+	std::cout << x << std::endl;
+}
+
+std::vector<int> list_of_3_same_value_100 (/*size=*/3, /*value=*/100);
+
+std::vector<int> a = {1, 2, 4, 5}; 
+a.insert(a.begin() + 2, 3);  // {1, 2, 3, 4, 5}
+// insert from the end will also work
+// a.insert(a.end() - 1, 10);
+
+// look at last element
+a.back()  // 5
+a.pop_back()   // doesn't return 5 and `a` becomes [1, 2, 3, 4]
+
+
+```
+---
+
+## HashMap
+
+
+Python
+```python
+from collections import defaultdict
+
+map = defaultdict(int)
+map[1] = 1
+map[2] = 3
+
+for i in range(4):
+	print(f"map[{i}] -> {map[i]}")
+
+# map[0] -> 0
+# map[1] -> 1
+# map[2] -> 3
+# map[3] -> 0
+```
+
+C++
+
+```cpp
+unordered_map<int, size_t> map = {{1, 1}, {2, 3}};
+
+for (int i = 1; i < 4; i++) {
+    auto emplace_pair = map.emplace(i, 0);
+    std::cout << "map[" << i << "] -> " << map[i] << std::endl;  
+}
+
+// map[0] -> 0
+// map[1] -> 1
+// map[2] -> 3
+// map[3] -> 0
+```
+
+---
+
+## STL
+The swap in Python is just amazing. Why can't all the other languages copy this! In C++'s defense `std::swap` is not that bad;
+
+```python
+x = 10
+y = 5
+print("Before swap:")
+print(f"{x=} {y=}")
+print("After swap:")
+print(f"{x=} {y=}")
+
+# Before swap:
+# x=10 y=5
+
+# After swap:
+# x=5 y=10
+
+# just a python thing
+a, b, c, d = 1, 2, 3, 4
+a, b, c, d = d, c, b, a
+
+print(f"{a=} {b=} {c=} {d=}")
+
+# a=4 b=3 c=2 d=1
+```
+
+
+```cpp
+int x = 10;
+int y = 5;
+
+std::cout << "Before swap:" << std::endl;
+std::cout << "x: " << x << " y: " << y << std::endl;
+std::swap(x, y);
+
+std::cout << "After swap:" << std::endl;
+std::cout << "x: " << x << " y: " << y << std::endl;
+
+// Before swap:
+// x: 10 y: 5
+
+// After swap:
+// x: 5 y: 10
+```
+---
