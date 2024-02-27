@@ -322,6 +322,7 @@ for (int i = 1; i < 4; i++) {
 ## STL
 The swap in Python is just amazing. Why can't all the other languages copy this! In C++'s defense `std::swap` is not that bad;
 
+Python
 ```python
 x = 10
 y = 5
@@ -345,6 +346,7 @@ print(f"{a=} {b=} {c=} {d=}")
 # a=4 b=3 c=2 d=1
 ```
 
+C++
 
 ```cpp
 int x = 10;
