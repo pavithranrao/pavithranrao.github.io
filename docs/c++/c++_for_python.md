@@ -366,3 +366,71 @@ std::cout << "x: " << x << " y: " << y << std::endl;
 // x: 5 y: 10
 ```
 ---
+
+## Class and structs
+
+### structs
+C++ `struct`s are equivalent to `namedtuple` in Python but more powerful that the `namedtuple`.
+
+Python
+
+```python
+# Basic example
+Point = namedtuple('Point', ['x', 'y'])
+p = Point(11, y=22)     # instantiate with positional or keyword arguments
+p[0] + p[1]             # indexable like the plain tuple (11, 22)
+x, y = p                # unpack like a regular tuple
+x, y
+
+p.x + p.y               # fields also accessible by name
+p                       # readable __repr__ with a name=value style
+```
+
+C++
+
+```cpp
+#include <iostream>
+
+struct coordinate {
+    int x = 5;
+    int y;
+    
+    coordinate(int _y): x(10) { // constructors
+        y = _y;
+    }
+    
+    coordinate(int _x, int _y) {
+        x = _x;
+        y = _y;
+    }
+    
+    coordinate() {
+        y = 20;
+    }
+	~coordinate() {} // destructor
+    
+    void print() {
+        std::cout << "(" <<  x << " , " << y << ")" << std::endl;
+    }
+};
+
+int main() {
+    // Write C++ code here
+    coordinate c1;
+    // coordinate()
+    c1.print();
+    c1.x = 100;
+    c1.y = 200;
+    c1.print();
+    
+    coordinate c2(20);
+    // coordinate(int _y): x(10)
+    c2.print();
+    
+    coordinate c3 = {-1, -1};
+    // coordinate(int _x, int _y)
+    c3.print();
+
+    return 0;
+}
+```
