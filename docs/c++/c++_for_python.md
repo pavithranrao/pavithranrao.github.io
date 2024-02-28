@@ -365,6 +365,7 @@ std::cout << "x: " << x << " y: " << y << std::endl;
 // After swap:
 // x: 5 y: 10
 ```
+
 ---
 
 ## Class and structs
