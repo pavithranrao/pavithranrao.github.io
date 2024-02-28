@@ -319,7 +319,7 @@ for (int i = 1; i < 4; i++) {
 
 ---
 
-## STL
+## Swap
 The swap in Python is just amazing. Why can't all the other languages copy this! In C++'s defense `std::swap` is not that bad;
 
 Python
@@ -370,8 +370,7 @@ std::cout << "x: " << x << " y: " << y << std::endl;
 
 ## Class and structs
 
-### structs
-C++ `struct`s are equivalent to `namedtuple` in Python but more powerful that the `namedtuple`.
+C++ `struct`s are equivalent to `namedtuple` in Python but more powerful that the `namedtuple`. The C++ `struct` can have functions, constructors and destructors.
 
 Python
 
@@ -415,23 +414,68 @@ struct coordinate {
     }
 };
 
-int main() {
-    // Write C++ code here
-    coordinate c1;
-    // coordinate()
-    c1.print();
-    c1.x = 100;
-    c1.y = 200;
-    c1.print();
-    
-    coordinate c2(20);
-    // coordinate(int _y): x(10)
-    c2.print();
-    
-    coordinate c3 = {-1, -1};
-    // coordinate(int _x, int _y)
-    c3.print();
 
-    return 0;
-}
+// Write C++ code here
+coordinate c1;
+// coordinate()
+c1.print();
+c1.x = 100;
+c1.y = 200;
+c1.print();
+
+coordinate c2(20);
+// coordinate(int _y): x(10)
+c2.print();
+
+coordinate c3 = {-1, -1};
+// coordinate(int _x, int _y)
+c3.print();
+
 ```
+
+---
+
+## Tuple
+
+Similar to Python's `tuple` type, C++ has `std::tuple` from `tuple` header and `pair` a special case of `tuple` with two elements to offer. This comes handy when a function has to return more than one value. Things of similar context can be grouped into a `tuple` or `pair`.
+
+The key difference is `tuple` in Python is immutable whereas in C++ `std::tuple` and `std::pair` are mutable containers.
+
+Python
+```python
+point = (1, 1)
+point[0], point[1] # 1, 1
+
+student = ("John Doe", 1, 2.3)
+# syntatic destructure
+name, age, score = student
+```
+
+C++
+```cpp
+#include <iostream>
+#include <tuple>
+#include <utility>
+#include <string>
+
+std::pair<int, int> point = {1, 1};
+std::cout << point.first << " " << point.second << std::endl; // 1 1
+
+
+std::tuple<std::string, int, float> student = {"John Doe", 1, 1.2};
+
+# syntatic destructure
+const auto& [name, age, score] = student;
+std::cout 
+	<< "Name: " << name
+	<< " Age: " << age
+	<< " Score: " << score
+	<< std::endl;
+// Name: John Doe Age: 1 Score: 1.2
+```
+
+
+---
+
+## Foot Note
+1. Runestone academy's [C++ for Python Programmers](https://runestone.academy/ns/books/published/cpp4python/index.html) is great place to start. 
