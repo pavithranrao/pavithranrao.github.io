@@ -1,6 +1,6 @@
 # C++ for Python
 
- wanted to have a quick documentation that compare the syntax. By reviewing this document, you can quickly refresh your memory on key C++ concepts without having to spend hours poring over dry technical manuals. This is no way going to be as good as https://en.cppreference.com/ but this document aims to get you started quickly. Whether you're preparing for a job interview, transitioning to a new project, or simply looking to expand your skillset, this resource is designed to make learning (or rediscovering) C++ painlessly and efficiently.
+I wanted to have a quick documentation that compare the syntax. By reviewing this document, you can quickly refresh your memory on key C++ concepts without having to spend hours poring over dry technical manuals. This is no way going to be as good as https://en.cppreference.com/ but this document aims to get you started quickly. Whether you're preparing for a job interview, transitioning to a new project, or simply looking to expand your skillset, this resource is designed to make learning (or rediscovering) C++ painlessly and efficiently.
 
 ## Primitive Types
 
