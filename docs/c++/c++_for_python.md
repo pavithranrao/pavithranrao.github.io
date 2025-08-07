@@ -1,5 +1,6 @@
+# C++ for Python
 
-After working a long time in Python, I tend to forget the basic C++ syntax. The document compares the syntax between Python and C++ and can refresh the C++ syntax with little effort.
+ wanted to have a quick documentation that compare the syntax. By reviewing this document, you can quickly refresh your memory on key C++ concepts without having to spend hours poring over dry technical manuals. This is no way going to be as good as https://en.cppreference.com/ but this document aims to get you started quickly. Whether you're preparing for a job interview, transitioning to a new project, or simply looking to expand your skillset, this resource is designed to make learning (or rediscovering) C++ painlessly and efficiently.
 
 ## Primitive Types
 
@@ -169,8 +170,8 @@ std::vector<char> data(str.begin(), str.end());
 Python
 
 ```python
-a: = True
-b: = False
+a: bool = True
+b: bool = False
 
 a and b # False
 a or b  # True
@@ -299,6 +300,12 @@ for i in range(4):
 # map[1] -> 1
 # map[2] -> 3
 # map[3] -> 0
+
+# check key exists
+5 in map  # False
+
+# deleting a key
+del map[2]
 ```
 
 C++
@@ -307,6 +314,8 @@ C++
 unordered_map<int, size_t> map = {{1, 1}, {2, 3}};
 
 for (int i = 1; i < 4; i++) {
+	// equivalent to defaultdict
+	// inserts key, value if the key is not found in the `map`
     auto emplace_pair = map.emplace(i, 0);
     std::cout << "map[" << i << "] -> " << map[i] << std::endl;  
 }
@@ -315,6 +324,16 @@ for (int i = 1; i < 4; i++) {
 // map[1] -> 1
 // map[2] -> 3
 // map[3] -> 0
+
+// C++20 introduced contains
+map.contains(5)            // false
+
+// for C++17 and below
+map.find(5) != map.end()  // true iff the key exists
+                          // false
+
+# deleting a key
+map.erase(2);
 ```
 
 ---
@@ -477,5 +496,46 @@ std::cout
 
 ---
 
+## Walrus operator
+The walrus operator `:=` was introduced in Python in 3.8. To learn more checkout the [Real Python's blog](https://realpython.com/python-walrus-operator/)
+Python
+
+```python
+def a_costly_fn():
+	return False
+
+
+if (a := a_costly_fn()):
+	print(f"Inside the true branch {a}")
+else:
+	print(f"Inside the false branch {a}")
+
+```
+
+
+With C++ this concept is baked within the assignment operator ` = `.
+
+```cpp
+bool a_costly_fn() {
+    // mocks a costly function
+    return false;
+}
+
+
+// call and store a costly function, andalso use the output
+if (auto a = a_costly_fn()) {
+	std::cout << "inside the true arm " << std::boolalpha << a << std::endl;
+} else {
+	std::cout << "inside the false arm " << std::boolalpha << a << std::endl;
+}
+
+// inside the false arm false
+```
+
+This [SO answer](https://stackoverflow.com/a/68870111) was super useful. Shout out to [Remy Lebeau](https://stackoverflow.com/users/65863/remy-lebeau)!
+
+---
+
 ## Foot Note
-1. Runestone academy's [C++ for Python Programmers](https://runestone.academy/ns/books/published/cpp4python/index.html) is great place to start. 
+1. Runestone academy's [C++ for Python Programmers](https://runestone.academy/ns/books/published/cpp4python/index.html) is great.
+2. [Hacking C++](https://hackingcpp.com/) is an amazing website, covers most topics.

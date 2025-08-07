@@ -7,4 +7,4 @@
 
 
 ## Contact
-- Mail: [`pavithran38[at]pec[dot]edu`](mailto:pavithran38@pec.edu?subject=Test)
+- Mail: [`pavithran38[at]ptuniv[dot]edu[dot]in`](mailto:pavithran38@ptuniv.edu.in?subject=Hey)

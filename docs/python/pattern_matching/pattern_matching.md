@@ -191,7 +191,7 @@ perform_fn(echo)
     Hello, World!
 
 
-## End Note
+## Foot Note
 
 I also found these blogs useful:
 
