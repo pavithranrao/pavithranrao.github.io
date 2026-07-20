@@ -1,0 +1,414 @@
+/* Pastel VIBGYOR Theme for MkDocs Material */
+
+/* CSS Variables for Pastel VIBGYOR Colors */
+:root {
+  /* Pastel VIBGYOR Colors */
+  --pastel-violet: #DDA0DD;
+  --pastel-indigo: #B5C7EA;
+  --pastel-blue: #AEC6CF;
+  --pastel-green: #77DD77;
+  --pastel-yellow: #FDFD96;
+  --pastel-orange: #FFB347;
+  --pastel-red: #FF6961;
+
+  /* Additional pastel shades */
+  --pastel-pink: #FFB7B2;
+  --pastel-mint: #98FF98;
+  --pastel-lavender: #E6E6FA;
+  --pastel-peach: #FFDAB9;
+  --pastel-sky: #87CEEB;
+  --pastel-coral: #FFA07A;
+
+  /* Background colors */
+  --pastel-bg-light: #FFFEF9;
+  --pastel-bg-cream: #FFF8E7;
+  --pastel-bg-soft: #FDFBF7;
+
+  /* Text colors for pastel backgrounds */
+  --pastel-text-dark: #2C3E50;
+  --pastel-text-medium: #546E7A;
+  --pastel-text-light: #7F8C8D;
+}
+
+/* Global soft background */
+body {
+  background-color: var(--pastel-bg-light) !important;
+}
+
+/* Pastel Header */
+.md-header {
+  background: linear-gradient(135deg,
+    var(--pastel-violet) 0%,
+    var(--pastel-indigo) 25%,
+    var(--pastel-blue) 50%,
+    var(--pastel-green) 75%,
+    var(--pastel-yellow) 100%);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Soft pastel navigation */
+.md-nav__item {
+  border-radius: 8px;
+  margin: 2px 0;
+  transition: all 0.3s ease;
+}
+
+.md-nav__item:hover {
+  background-color: var(--pastel-bg-cream);
+}
+
+.md-nav__item--active {
+  background-color: var(--pastel-lavender);
+  border-left: 3px solid var(--pastel-violet);
+}
+
+/* Pastel colored navigation items */
+.md-nav__item:nth-child(7n+1) { border-left: 3px solid var(--pastel-red); }
+.md-nav__item:nth-child(7n+2) { border-left: 3px solid var(--pastel-orange); }
+.md-nav__item:nth-child(7n+3) { border-left: 3px solid var(--pastel-yellow); }
+.md-nav__item:nth-child(7n+4) { border-left: 3px solid var(--pastel-green); }
+.md-nav__item:nth-child(7n+5) { border-left: 3px solid var(--pastel-blue); }
+.md-nav__item:nth-child(7n+6) { border-left: 3px solid var(--pastel-indigo); }
+.md-nav__item:nth-child(7n+7) { border-left: 3px solid var(--pastel-violet); }
+
+/* Pastel cards and containers */
+.md-typeset .admonition {
+  border-radius: 12px;
+  border-left: 4px solid;
+  background-color: var(--pastel-bg-soft);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* Pastel colored admonitions */
+.md-typeset .admonition.note {
+  border-left-color: var(--pastel-blue);
+  background-color: rgba(174, 198, 207, 0.1);
+}
+
+.md-typeset .admonition.warning {
+  border-left-color: var(--pastel-orange);
+  background-color: rgba(255, 179, 71, 0.1);
+}
+
+.md-typeset .admonition.tip {
+  border-left-color: var(--pastel-green);
+  background-color: rgba(119, 221, 119, 0.1);
+}
+
+.md-typeset .admonition.important {
+  border-left-color: var(--pastel-red);
+  background-color: rgba(255, 105, 97, 0.1);
+}
+
+.md-typeset .admonition.caution {
+  border-left-color: var(--pastel-yellow);
+  background-color: rgba(253, 253, 150, 0.1);
+}
+
+/* Pastel code blocks */
+.md-typeset pre {
+  background-color: var(--pastel-bg-cream) !important;
+  border-radius: 8px;
+  border: 1px solid var(--pastel-lavender);
+}
+
+.md-typeset code {
+  background-color: var(--pastel-bg-cream);
+  color: var(--pastel-text-dark);
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+
+/* Pastel links */
+.md-typeset a {
+  color: var(--pastel-indigo);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--pastel-blue);
+  transition: all 0.3s ease;
+}
+
+.md-typeset a:hover {
+  color: var(--pastel-violet);
+  border-bottom-color: var(--pastel-violet);
+}
+
+/* Pastel tables */
+.md-typeset table {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.md-typeset table th {
+  background: linear-gradient(135deg,
+    var(--pastel-violet) 0%,
+    var(--pastel-indigo) 100%);
+  color: white;
+  font-weight: 500;
+}
+
+.md-typeset table tr:nth-child(even) {
+  background-color: rgba(221, 160, 221, 0.05);
+}
+
+.md-typeset table tr:hover {
+  background-color: rgba(255, 179, 71, 0.1);
+}
+
+/* Pastel buttons */
+.md-button {
+  background-color: var(--pastel-blue);
+  color: white;
+  border-radius: 20px;
+  padding: 8px 16px;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.md-button:hover {
+  background-color: var(--pastel-indigo);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(181, 199, 234, 0.4);
+}
+
+/* Colored button variants */
+.md-button--primary {
+  background-color: var(--pastel-violet);
+}
+
+.md-button--primary:hover {
+  background-color: var(--pastel-indigo);
+}
+
+/* Pastel tabs */
+.md-tabs {
+  background: linear-gradient(90deg,
+    var(--pastel-red) 0%,
+    var(--pastel-orange) 14%,
+    var(--pastel-yellow) 28%,
+    var(--pastel-green) 42%,
+    var(--pastel-blue) 56%,
+    var(--pastel-indigo) 70%,
+    var(--pastel-violet) 84%
+  );
+}
+
+.md-tabs__item {
+  transition: all 0.3s ease;
+}
+
+.md-tabs__item:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.md-tabs__item--active {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-bottom: 3px solid white;
+}
+
+/* Pastel content tabs */
+.md-typeset .tabbed-blocks {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.md-typeset .tabbed-blocks > label {
+  background-color: var(--pastel-bg-cream);
+  color: var(--pastel-text-dark);
+  border: 1px solid var(--pastel-lavender);
+  transition: all 0.3s ease;
+}
+
+.md-typeset .tabbed-blocks > label:hover {
+  background-color: var(--pastel-lavender);
+}
+
+.md-typeset .tabbed-blocks > input:checked + label {
+  background-color: var(--pastel-blue);
+  color: white;
+  border-color: var(--pastel-blue);
+}
+
+/* Pastel search */
+.md-search__input {
+  background-color: var(--pastel-bg-soft);
+  border: 1px solid var(--pastel-lavender);
+  border-radius: 20px;
+  color: var(--pastel-text-dark);
+}
+
+.md-search__input:focus {
+  background-color: white;
+  border-color: var(--pastel-blue);
+}
+
+/* Pastel search results */
+.md-search-result__meta {
+  color: var(--pastel-text-light);
+}
+
+.md-search-result__link {
+  color: var(--pastel-indigo);
+}
+
+.md-search-result__link:hover {
+  color: var(--pastel-violet);
+}
+
+/* Pastel footer */
+.md-footer {
+  background: linear-gradient(135deg,
+    var(--pastel-lavender) 0%,
+    var(--pastel-bg-soft) 100%);
+}
+
+.md-footer-nav {
+  background-color: var(--pastel-bg-soft);
+  border-top: 1px solid var(--pastel-lavender);
+}
+
+/* Pastel tags */
+.md-tag {
+  background-color: var(--pastel-lavender);
+  color: var(--pastel-text-dark);
+  border-radius: 15px;
+  padding: 2px 8px;
+  font-size: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.md-tag:hover {
+  background-color: var(--pastel-blue);
+  color: white;
+}
+
+/* Colored tags for different categories */
+.md-tag--red { background-color: var(--pastel-red); color: white; }
+.md-tag--orange { background-color: var(--pastel-orange); color: white; }
+.md-tag--yellow { background-color: var(--pastel-yellow); color: var(--pastel-text-dark); }
+.md-tag--green { background-color: var(--pastel-green); color: white; }
+.md-tag--blue { background-color: var(--pastel-blue); color: white; }
+.md-tag--indigo { background-color: var(--pastel-indigo); color: white; }
+.md-tag--violet { background-color: var(--pastel-violet); color: white; }
+
+/* Pastel headers with color cycling */
+.md-typeset h1 {
+  color: var(--pastel-violet);
+  border-bottom: 2px solid var(--pastel-lavender);
+}
+
+.md-typeset h2 {
+  color: var(--pastel-indigo);
+}
+
+.md-typeset h3 {
+  color: var(--pastel-blue);
+}
+
+.md-typeset h4 {
+  color: var(--pastel-green);
+}
+
+/* Pastel blockquotes */
+.md-typeset blockquote {
+  border-left: 4px solid var(--pastel-violet);
+  background-color: var(--pastel-bg-soft);
+  padding: 1rem;
+  border-radius: 8px;
+  color: var(--pastel-text-medium);
+}
+
+/* Pastel task lists */
+.md-typeset .task-list-item {
+  background-color: var(--pastel-bg-soft);
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin: 4px 0;
+}
+
+.md-typeset .task-list-control [type="checkbox"]:checked {
+  background-color: var(--pastel-green);
+  border-color: var(--pastel-green);
+}
+
+/* Soft scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--pastel-bg-soft);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg,
+    var(--pastel-blue) 0%,
+    var(--pastel-violet) 100%);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg,
+    var(--pastel-indigo) 0%,
+    var(--pastel-blue) 100%);
+}
+
+/* Pastel highlight color */
+::selection {
+  background-color: var(--pastel-peach);
+  color: var(--pastel-text-dark);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 76.1875em) {
+  .md-nav {
+    background-color: var(--pastel-bg-soft);
+  }
+}
+
+/* Dark mode adjustments */
+@media screen and (prefers-color-scheme: dark) {
+  body {
+    background-color: #1a1a2e;
+  }
+
+  .md-typeset .admonition {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .md-typeset pre {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+  }
+
+  .md-typeset code {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #e0e0e0;
+  }
+
+  .md-typeset table th {
+    background: linear-gradient(135deg,
+      var(--pastel-indigo) 0%,
+      var(--pastel-blue) 100%);
+  }
+
+  .md-typeset table tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.03);
+  }
+
+  .md-typeset table tr:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* Soft animations and transitions */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Remove transition from non-interactive elements for performance */
+.md-typeset p,
+.md-typeset li,
+.md-typeset div {
+  transition: none;
+}

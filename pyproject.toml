@@ -8,7 +8,7 @@ packages = [{include = "pavithranrao"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-mkdocs-material = "^9.5.2"
+mkdocs-material = "^9.7.0"
 
 
 [build-system]

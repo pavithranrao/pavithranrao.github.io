@@ -1,60 +1,144 @@
 site_name: Pavi's Digital Garden
+site_url: https://pavithranrao.github.io/
+site_description: Pavi's Digital Garden - A collection of technical notes and explorations
+site_author: Pavithran Ramachandran
+
+# Repository integration
+repo_url: https://github.com/pavithranrao/pavithranrao.github.io
+repo_name: pavithranrao/pavithranrao.github.io
+
+# Theme configuration
 theme:
   name: material
+  language: en
+
+  # Dynamic features
   features:
+    # Navigation improvements
     - navigation.sections
+    - navigation.expand
     - navigation.path
-    - toc.follow
     - navigation.top
+    - navigation.indexes
+    - navigation.footer
+
+    # Table of contents
+    - toc.follow
+    - toc.integrate
+
+    # Search enhancements
     - search.suggest
     - search.highlight
+    - search.share
+
+    # Content features
     - content.tabs.link
     - content.code.annotation
     - content.code.copy
-  language: en
+    - content.tooltips
+
+    # UI enhancements
+    - header.autohide
+    - announce.round
+
+    # Instant navigation
+    - instant
+
+  # Pastel VIBGYOR Color scheme
   palette:
-      # Palette toggle for light mode
+    # Light pastel theme
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      toggle:
-        icon: material/brightness-4
-        name: Switch to dark mode
-      primary: deep purple
-      accent: indigo
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate 
+      primary: indigo
+      accent: pink
       toggle:
         icon: material/brightness-7
-        name: Switch to light mode    
-      primary: deep purple
-      accent: indigo
+        name: Switch to dark mode
+
+    # Dark theme for better contrast with pastels
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: pink
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+  # Logo and favicon
   favicon: assets/favicon.png
   logo: assets/favicon.png
 
+# Plugins
 plugins:
-  - social
-  - search
+  - search:
+      lang:
+        - en
 
+  - social:
+      cards: true
+
+  - tags
+
+  - blog:
+      blog_dir: blog
+      blog_toc: true
+
+# Extensions
+markdown_extensions:
+  # Python Markdown Extensions
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+
+  - pymdownx.arithmatex:
+      generic: true
+
+  # Built-in Markdown extensions
+  - admonition
+  - footnotes
+  - pymdownx.details
+  - pymdownx.mark
+  - attr_list
+  - md_in_html
+
+  # Additional useful extensions
+  - pymdownx.emoji
+
+  - pymdownx.tabbed:
+      alternate_style: true
+
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+  - pymdownx.smartsymbols
+
+# Extra configuration
 extra:
+  # Social links
   social:
     - icon: fontawesome/brands/github-alt
       link: https://github.com/pavithranrao
+      name: Follow me on GitHub
+
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/in/pavithran-ramachandran-9042aaa1/
+      name: Connect on LinkedIn
+
     - icon: fontawesome/brands/stack-overflow
       link: https://stackoverflow.com/users/7991002/pavithran-ramachandran
-    
-    
-markdown_extensions:
-  - pymdownx.highlight:
-      anchor_linenums: true
-  - pymdownx.inlinehilite
-  - pymdownx.snippets
-  - admonition
-  - pymdownx.arithmatex:
-      generic: true
-  - footnotes
-  - pymdownx.details
-  - pymdownx.superfences
-  - pymdownx.mark
-  - attr_list
+      name: Stack Overflow Profile
+
+# Extra CSS and JavaScript
+extra_css:
+  - assets/stylesheets/extra.css
+
+extra_javascript:
+  - assets/javascripts/extra.js
+
+# Copyright
+copyright: Copyright &copy; 2024 - 2026 Pavithran Ramachandran

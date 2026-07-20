@@ -2,11 +2,9 @@
 
 This page contains an interactive demonstration of LoRA (Low-Rank Adaptation), a parameter-efficient fine-tuning method for large language models.
 
-{% raw %}
-```html
-<iframe src="lora-illustration.html" width="100%" height="1200" frameborder="0" style="border: 1px solid #e5e7eb; border-radius: 8px;"></iframe>
-```
-{% endraw %}
+<div style="background: linear-gradient(135deg, rgba(221, 160, 221, 0.1) 0%, rgba(181, 199, 234, 0.1) 100%); border-radius: 16px; padding: 20px; margin: 32px 0; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);">
+<iframe src="../lora-illustration.html" width="100%" height="1200" frameborder="0" style="border: none; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);"></iframe>
+</div>
 
 ## About LoRA
 

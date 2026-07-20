@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LoRA Illustrated • VanJS</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
-        
+
         :root {
             --bg: #fafaf9;
             --text: #1f2937;
@@ -16,9 +17,13 @@
             --border: #e5e7eb;
             --matrix-bg: #f8fafc;
         }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background: var(--bg);
@@ -27,14 +32,17 @@
             line-height: 1.6;
             font-feature-settings: "tnum";
         }
-        
-        .container { max-width: 1080px; margin: 0 auto; }
-        
+
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+        }
+
         .header {
             text-align: center;
             margin-bottom: 48px;
         }
-        
+
         .header h1 {
             font-size: 2.1rem;
             font-weight: 600;
@@ -42,13 +50,13 @@
             color: var(--text);
             margin-bottom: 6px;
         }
-        
+
         .header p {
             color: var(--text-muted);
             font-size: 1.05rem;
             font-weight: 400;
         }
-        
+
         .card {
             background: var(--card);
             border-radius: 16px;
@@ -57,7 +65,7 @@
             margin-bottom: 32px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
         }
-        
+
         .matrix-grid {
             display: grid;
             gap: 2px;
@@ -66,7 +74,7 @@
             border-radius: 12px;
             border: 1px solid var(--border);
         }
-        
+
         .matrix-cell {
             width: 36px;
             height: 36px;
@@ -78,9 +86,9 @@
             color: #374151;
             border-radius: 5px;
             transition: all 0.15s ease;
-            box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
         }
-        
+
         .matrix-label {
             font-size: 0.875rem;
             font-weight: 600;
@@ -90,13 +98,13 @@
             align-items: center;
             gap: 8px;
         }
-        
+
         .matrix-wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-        
+
         .matrices-row {
             display: flex;
             flex-wrap: wrap;
@@ -104,7 +112,7 @@
             justify-content: center;
             align-items: flex-start;
         }
-        
+
         .controls {
             display: flex;
             gap: 16px;
@@ -117,15 +125,16 @@
             border: 1px solid var(--border);
             border-radius: 12px;
         }
-        
+
         .control-group {
             display: flex;
             align-items: center;
             gap: 10px;
             font-size: 0.9rem;
         }
-        
-        select, input[type="range"] {
+
+        select,
+        input[type="range"] {
             padding: 6px 10px;
             border-radius: 8px;
             border: 1px solid var(--border);
@@ -134,7 +143,7 @@
             color: var(--text);
             font-weight: 500;
         }
-        
+
         .btn {
             background: var(--accent);
             color: white;
@@ -147,19 +156,19 @@
             transition: all 0.15s ease;
             box-shadow: 0 1px 2px rgba(241, 94, 61, 0.2);
         }
-        
+
         .btn:hover {
             background: #e14d2c;
             transform: translateY(-1px);
         }
-        
+
         .btn.secondary {
             background: white;
             color: var(--text);
             border: 1px solid var(--border);
             box-shadow: none;
         }
-        
+
         .heatmap-label {
             font-size: 0.85rem;
             font-weight: 500;
@@ -167,7 +176,7 @@
             color: var(--text-muted);
             text-align: center;
         }
-        
+
         .legend {
             display: flex;
             align-items: center;
@@ -177,18 +186,21 @@
             font-size: 0.75rem;
             color: var(--text-muted);
         }
-        
+
         .legend-gradient {
             width: 148px;
             height: 10px;
             border-radius: 9999px;
-            background: linear-gradient(to right, 
-                #ffffff, #dbeafe, #d1fae5, #fef3c7, #fed7aa, #fecaca, #e0e7ff);
+            background: linear-gradient(to right,
+                    #ffffff, #dbeafe, #d1fae5, #fef3c7, #fed7aa, #fecaca, #e0e7ff);
             border: 1px solid #e5e7eb;
         }
-        
-        .value { font-weight: 600; color: var(--accent); }
-        
+
+        .value {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
         .matrix-input {
             width: 100%;
             height: 100%;
@@ -200,7 +212,33 @@
             color: #374151;
             outline: none;
         }
-        
+
+        /* Hover arrow system */
+        #arrow-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .arrow {
+            stroke: #f15e3d;
+            stroke-width: 2.5;
+            stroke-opacity: 0.85;
+            fill: none;
+            stroke-dasharray: 4 2;
+            animation: dash 0.6s linear forwards;
+        }
+
+        @keyframes dash {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
         .explanation {
             max-width: 560px;
             margin: 0 auto 40px;
@@ -211,6 +249,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <!-- Header -->
@@ -218,13 +257,13 @@
             <h1>LoRA</h1>
             <p style="font-size:1.4rem; font-weight:500; color:#7c6b8f;">Low-Rank Adaptation • Interactive Demo</p>
         </div>
-        
+
         <div class="explanation">
-            LoRA freezes the original weights <span class="value">W</span> and learns a low-rank update 
-            <span class="value">ΔW = B × A</span>. 
+            LoRA freezes the original weights <span class="value">W</span> and learns a low-rank update
+            <span class="value">ΔW = B × A</span>.
             This dramatically reduces the number of trainable parameters.
         </div>
-        
+
         <!-- Controls -->
         <div class="card">
             <div class="controls">
@@ -237,74 +276,107 @@
                         <option value="4">4</option>
                     </select>
                 </div>
-                
+
                 <div class="control-group">
                     <label style="font-weight:600; color:#6b5b7a;">Scaling (α):</label>
                     <input type="range" id="alpha-slider" min="0.1" max="5" step="0.1" value="1.5" style="width:120px;">
                     <span id="alpha-value" style="font-weight:700; min-width:34px; color:#a78bfa;">1.5</span>
                 </div>
-                
+
                 <button id="random-btn" class="btn">Randomize All</button>
-                <button id="reset-btn" class="btn" style="background: linear-gradient(#d6e8f8, #c4d8f0); color:#4b3f5e; box-shadow: 0 4px 10px rgba(192, 132, 252, 0.15);">Reset</button>
+                <button id="reset-btn" class="btn"
+                    style="background: linear-gradient(#d6e8f8, #c4d8f0); color:#4b3f5e; box-shadow: 0 4px 10px rgba(192, 132, 252, 0.15);">Reset</button>
             </div>
         </div>
-        
+
         <!-- Matrices Container -->
-        <div class="card">
+        <div class="card" style="position: relative;">
+            <svg id="arrow-overlay" width="100%" height="100%"
+                style="position:absolute; top:0; left:0; pointer-events:none; z-index:20;"></svg>
             <div class="matrices-row">
-                
-                <!-- Original W -->
-                <div class="matrix-wrapper">
-                    <div class="matrix-label">
-                        <span style="background:#d6e8f8; width:10px; height:10px; border-radius:3px;"></span>
-                        <span><strong>W</strong> (original 8×8)</span>
+
+                <!-- A and B grouped (left side) -->
+                <div style="display: flex; gap: 44px; align-items: flex-start; margin-right: 20px;">
+                    <!-- A Matrix -->
+                    <div class="matrix-wrapper">
+                        <div class="matrix-label">
+                            <span style="background:#d1fae5; width:10px; height:10px; border-radius:3px;"></span>
+                            <span><strong>A</strong> (8×r)</span>
+                        </div>
+                        <div id="a-matrix" class="matrix-grid"></div>
+                        <div class="heatmap-label">Low-rank adapter A</div>
                     </div>
-                    <div id="w-matrix" class="matrix-grid" style="grid-template-columns: repeat(8, 1fr);"></div>
-                    <div class="heatmap-label">Original Weights</div>
-                </div>
-                
-                <!-- A Matrix -->
-                <div class="matrix-wrapper">
-                    <div class="matrix-label">
-                        <span style="background:#e8d6f8; width:10px; height:10px; border-radius:3px;"></span>
-                        <span><strong>A</strong> (8×r)</span>
+
+                    <!-- B Matrix -->
+                    <div class="matrix-wrapper">
+                        <div class="matrix-label">
+                            <span style="background:#fef3c7; width:10px; height:10px; border-radius:3px;"></span>
+                            <span><strong>B</strong> (r×8)</span>
+                        </div>
+                        <div id="b-matrix" class="matrix-grid"></div>
+                        <div class="heatmap-label">Low-rank adapter B</div>
                     </div>
-                    <div id="a-matrix" class="matrix-grid"></div>
-                    <div class="heatmap-label">Low-rank adapter A</div>
                 </div>
-                
-                <!-- B Matrix -->
-                <div class="matrix-wrapper">
-                    <div class="matrix-label">
-                        <span style="background:#f8d7e8; width:10px; height:10px; border-radius:3px;"></span>
-                        <span><strong>B</strong> (r×8)</span>
+
+                <!-- W + ΔW → W′ flow (two-row layout) -->
+                <div style="display: flex; flex-direction: column; gap: 18px; align-items: center;">
+
+                    <!-- Top row: W + αΔW -->
+                    <div style="display: flex; align-items: center; gap: 12px;">
+
+                        <!-- W -->
+                        <div class="matrix-wrapper">
+                            <div class="matrix-label">
+                                <span style="background:#dbeafe; width:10px; height:10px; border-radius:3px;"></span>
+                                <span><strong>W</strong></span>
+                            </div>
+                            <div id="w-matrix" class="matrix-grid" style="grid-template-columns: repeat(8, 1fr);"></div>
+                            <div class="heatmap-label">Original</div>
+                        </div>
+
+                        <!-- Plus sign -->
+                        <div style="font-size: 2rem; color: #6b7280; font-weight: 300; margin-top: 22px;">+</div>
+
+                        <!-- αΔW -->
+                        <div class="matrix-wrapper">
+                            <div class="matrix-label">
+                                <span style="background:#fed7aa; width:10px; height:10px; border-radius:3px;"></span>
+                                <span><strong>αΔW</strong> = α(A × B)</span>
+                            </div>
+                            <div id="delta-matrix" class="matrix-grid" style="grid-template-columns: repeat(8, 1fr);">
+                            </div>
+                            <div class="heatmap-label">Scaled update</div>
+                        </div>
+
                     </div>
-                    <div id="b-matrix" class="matrix-grid"></div>
-                    <div class="heatmap-label">Low-rank adapter B</div>
-                </div>
-                
-                <!-- Delta W -->
-                <div class="matrix-wrapper">
-                    <div class="matrix-label">
-                        <span style="background:#d6f8e8; width:10px; height:10px; border-radius:3px;"></span>
-                        <span><strong>ΔW</strong> = B × A</span>
+
+                    <!-- Arrow down + W' -->
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 120px;"></div> <!-- spacer to align under the + -->
+
+                        <div style="display: flex; flex-direction: column; align-items: center; margin-top: -8px;">
+                            <div style="font-size: 2.1rem; color: #6b7280; font-weight: 300; line-height: 1;">↓</div>
+                            <div
+                                style="font-size: 0.72rem; color: #6b7280; font-weight: 500; white-space: nowrap; margin-top: -2px;">
+                                W′ = W + αΔW
+                            </div>
+                        </div>
+
+                        <!-- W′ -->
+                        <div class="matrix-wrapper">
+                            <div class="matrix-label">
+                                <span style="background:#fecaca; width:10px; height:10px; border-radius:3px;"></span>
+                                <span><strong>W′</strong></span>
+                            </div>
+                            <div id="adapted-matrix" class="matrix-grid" style="grid-template-columns: repeat(8, 1fr);">
+                            </div>
+                            <div class="heatmap-label">Adapted weights</div>
+                        </div>
                     </div>
-                    <div id="delta-matrix" class="matrix-grid" style="grid-template-columns: repeat(8, 1fr);"></div>
-                    <div class="heatmap-label">Learned update</div>
+
                 </div>
-                
-                <!-- Adapted W -->
-                <div class="matrix-wrapper">
-                    <div class="matrix-label">
-                        <span style="background:#f8e8d6; width:10px; height:10px; border-radius:3px;"></span>
-                        <span><strong>W′</strong> = W + αΔW</span>
-                    </div>
-                    <div id="adapted-matrix" class="matrix-grid" style="grid-template-columns: repeat(8, 1fr);"></div>
-                    <div class="heatmap-label">Adapted weights</div>
-                </div>
-                
             </div>
-            
+
             <!-- Legend -->
             <div class="legend">
                 <div style="display:flex; align-items:center; gap:6px;">
@@ -314,12 +386,12 @@
                 </div>
             </div>
         </div>
-        
+
         <div style="text-align:center; font-size:0.85rem; color:#6b7280; margin-top:12px; font-weight:500;">
             Edit values in A and B to instantly see how the low-rank update changes ΔW and the final model.
         </div>
     </div>
-    
+
     <script>
         // Generate random matrix
         function generateRandomMatrix(rows, cols, scale = 1) {
@@ -333,7 +405,7 @@
             }
             return matrix;
         }
-        
+
         // Rich pastel multi-color palette: white → blue → green → yellow → orange → red → purple
         const pastelColors = [
             [255, 255, 255],   // white
@@ -344,42 +416,42 @@
             [250, 219, 216],   // light red/pink
             [232, 218, 239],   // light purple
         ];
-        
+
         function getPastelColor(value, minVal, maxVal) {
             const range = maxVal - minVal || 1;
             let normalized = Math.max(0, Math.min(1, (value - minVal) / range));
-            
+
             // Map to color stops
             const numStops = pastelColors.length - 1;
             const scaled = normalized * numStops;
             const index = Math.floor(scaled);
             const t = scaled - index;
-            
+
             const c1 = pastelColors[Math.min(index, numStops)];
             const c2 = pastelColors[Math.min(index + 1, numStops)];
-            
+
             const r = Math.round(c1[0] + (c2[0] - c1[0]) * t);
             const g = Math.round(c1[1] + (c2[1] - c1[1]) * t);
             const b = Math.round(c1[2] + (c2[2] - c1[2]) * t);
-            
+
             return `rgb(${r}, ${g}, ${b})`;
         }
-        
+
         // Global state
         let W = generateRandomMatrix(8, 8, 1.5);
         let A = generateRandomMatrix(8, 2, 0.9);
         let B = generateRandomMatrix(2, 8, 0.9);
-        
+
         let currentRank = 2;
         let currentAlpha = 1.5;
-        
+
         function computeDeltaW(Amat, Bmat) {
             const n = Amat.length;      // 8
             const r = Amat[0].length;   // rank
             const m = Bmat[0].length;   // 8
-            
+
             const delta = Array.from({ length: n }, () => Array(m).fill(0));
-            
+
             for (let i = 0; i < n; i++) {
                 for (let j = 0; j < m; j++) {
                     let sum = 0;
@@ -391,96 +463,218 @@
             }
             return delta;
         }
-        
+
         function getGlobalMinMax() {
             let allValues = [];
             W.flat().forEach(v => allValues.push(v));
             A.flat().forEach(v => allValues.push(v));
             B.flat().forEach(v => allValues.push(v));
-            
+
             const delta = computeDeltaW(A, B);
             delta.flat().forEach(v => allValues.push(v));
-            
-            const adapted = W.map((row, i) => 
+
+            const adapted = W.map((row, i) =>
                 row.map((val, j) => val + currentAlpha * delta[i][j])
             );
             adapted.flat().forEach(v => allValues.push(v));
-            
+
             return { min: Math.min(...allValues), max: Math.max(...allValues) };
         }
-        
+
         function renderHeatmap(containerId, matrix, isEditable = false) {
             const container = document.getElementById(containerId);
             if (!container) return;
-            
+
             container.innerHTML = '';
             const { min, max } = getGlobalMinMax();
             const cols = matrix[0].length;
-            
+
             container.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
-            
+
             matrix.forEach((row, i) => {
                 row.forEach((val, j) => {
                     const cell = document.createElement('div');
                     cell.className = 'matrix-cell';
-                    
+                    cell.dataset.i = i;
+                    cell.dataset.j = j;
+                    cell.dataset.matrix = containerId;
+
                     const color = getPastelColor(val, min, max);
                     cell.style.backgroundColor = color;
-                    
+
                     if (isEditable) {
                         const input = document.createElement('input');
                         input.type = 'text';
                         input.value = val.toFixed(2);
                         input.className = 'matrix-input';
-                        
+
                         input.onblur = () => {
                             const newVal = parseFloat(input.value) || 0;
                             matrix[i][j] = newVal;
                             renderAll();
                         };
-                        
+
                         input.onkeydown = (e) => {
                             if (e.key === 'Enter') input.blur();
                         };
-                        
+
                         cell.appendChild(input);
                     } else {
                         cell.textContent = val.toFixed(1);
                     }
-                    
+
                     container.appendChild(cell);
                 });
             });
+
+            // Add hover listeners for arrows
+            addHoverListeners(containerId, matrix);
         }
-        
+
+        function addHoverListeners(containerId, matrix) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            const cells = container.querySelectorAll('.matrix-cell');
+
+            cells.forEach(cell => {
+                const i = parseInt(cell.dataset.i);
+                const j = parseInt(cell.dataset.j);
+
+                if (containerId === 'delta-matrix') {
+                    cell.onmouseenter = () => showDeltaArrows(i, j);
+                    cell.onmouseleave = clearArrows;
+                }
+
+                if (containerId === 'adapted-matrix') {
+                    cell.onmouseenter = () => showAdaptedArrows(i, j);
+                    cell.onmouseleave = clearArrows;
+                }
+            });
+        }
+
+        function showDeltaArrows(i, j) {
+            const svg = document.getElementById('arrow-overlay');
+            svg.innerHTML = '';
+
+            const aContainer = document.getElementById('a-matrix');
+            const bContainer = document.getElementById('b-matrix');
+            const deltaContainer = document.getElementById('delta-matrix');
+
+            // Draw arrows from A row i to ΔW[i][j]
+            for (let k = 0; k < currentRank; k++) {
+                const aCell = aContainer.querySelector(`[data-i="${i}"][data-j="${k}"]`);
+                const deltaCell = deltaContainer.querySelector(`[data-i="${i}"][data-j="${j}"]`);
+
+                if (aCell && deltaCell) {
+                    drawArrow(svg, aCell, deltaCell, '#10b981');
+                }
+            }
+
+            // Draw arrows from B column j to ΔW[i][j]
+            for (let k = 0; k < currentRank; k++) {
+                const bCell = bContainer.querySelector(`[data-i="${k}"][data-j="${j}"]`);
+                const deltaCell = deltaContainer.querySelector(`[data-i="${i}"][data-j="${j}"]`);
+
+                if (bCell && deltaCell) {
+                    drawArrow(svg, bCell, deltaCell, '#f59e0b');
+                }
+            }
+        }
+
+        function showAdaptedArrows(i, j) {
+            const svg = document.getElementById('arrow-overlay');
+            svg.innerHTML = '';
+
+            const wContainer = document.getElementById('w-matrix');
+            const deltaContainer = document.getElementById('delta-matrix');
+            const adaptedContainer = document.getElementById('adapted-matrix');
+            const aContainer = document.getElementById('a-matrix');
+            const bContainer = document.getElementById('b-matrix');
+
+            // Arrow from W[i][j] → W′
+            const wCell = wContainer.querySelector(`[data-i="${i}"][data-j="${j}"]`);
+            const adaptedCell = adaptedContainer.querySelector(`[data-i="${i}"][data-j="${j}"]`);
+            if (wCell && adaptedCell) {
+                drawArrow(svg, wCell, adaptedCell, '#3b82f6');
+            }
+
+            // Arrow from ΔW[i][j] → W′
+            const deltaCell = deltaContainer.querySelector(`[data-i="${i}"][data-j="${j}"]`);
+            if (deltaCell && adaptedCell) {
+                drawArrow(svg, deltaCell, adaptedCell, '#f15e3d');
+            }
+
+            // Also show full provenance: ΔW → A and B
+            if (deltaCell) {
+                for (let k = 0; k < currentRank; k++) {
+                    // From A
+                    const aCell = aContainer.querySelector(`[data-i="${i}"][data-j="${k}"]`);
+                    if (aCell) drawArrow(svg, aCell, deltaCell, '#10b981');
+
+                    // From B
+                    const bCell = bContainer.querySelector(`[data-i="${k}"][data-j="${j}"]`);
+                    if (bCell) drawArrow(svg, bCell, deltaCell, '#f59e0b');
+                }
+            }
+        }
+
+        function drawArrow(svg, fromEl, toEl, color) {
+            const fromRect = fromEl.getBoundingClientRect();
+            const toRect = toEl.getBoundingClientRect();
+            const svgRect = svg.getBoundingClientRect();
+
+            const x1 = fromRect.left + fromRect.width / 2 - svgRect.left;
+            const y1 = fromRect.top + fromRect.height / 2 - svgRect.top;
+            const x2 = toRect.left + toRect.width / 2 - svgRect.left;
+            const y2 = toRect.top + toRect.height / 2 - svgRect.top;
+
+            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            line.setAttribute("x1", x1);
+            line.setAttribute("y1", y1);
+            line.setAttribute("x2", x2);
+            line.setAttribute("y2", y2);
+            line.setAttribute("stroke", color);
+            line.setAttribute("stroke-width", "2.5");
+            line.setAttribute("stroke-opacity", "0.9");
+            line.setAttribute("stroke-dasharray", "5,3");
+
+            svg.appendChild(line);
+        }
+
+        function clearArrows() {
+            const svg = document.getElementById('arrow-overlay');
+            if (svg) svg.innerHTML = '';
+        }
+
         function renderAll() {
             // W
             renderHeatmap('w-matrix', W);
-            
+
             // A
             renderHeatmap('a-matrix', A, true);
-            
+
             // B
             renderHeatmap('b-matrix', B, true);
-            
+
             // ΔW = A @ B
             const delta = computeDeltaW(A, B);
             renderHeatmap('delta-matrix', delta);
-            
+
             // W'
-            const adapted = W.map((row, i) => 
+            const adapted = W.map((row, i) =>
                 row.map((val, j) => val + currentAlpha * delta[i][j])
             );
             renderHeatmap('adapted-matrix', adapted);
         }
-        
+
         function updateRank(newRank) {
             currentRank = newRank;
             A = generateRandomMatrix(8, newRank, 0.9);
             B = generateRandomMatrix(newRank, 8, 0.9);
             renderAll();
         }
-        
+
         function init() {
             // Rank selector
             const rankSelect = document.getElementById('rank-select');
@@ -488,20 +682,20 @@
             rankSelect.onchange = () => {
                 updateRank(parseInt(rankSelect.value));
             };
-            
+
             // Alpha slider
             const alphaSlider = document.getElementById('alpha-slider');
             const alphaValue = document.getElementById('alpha-value');
-            
+
             alphaSlider.value = currentAlpha;
             alphaValue.textContent = currentAlpha;
-            
+
             alphaSlider.oninput = () => {
                 currentAlpha = parseFloat(alphaSlider.value);
                 alphaValue.textContent = currentAlpha;
                 renderAll();
             };
-            
+
             // Randomize button
             document.getElementById('random-btn').onclick = () => {
                 W = generateRandomMatrix(8, 8, 1.5);
@@ -509,7 +703,7 @@
                 B = generateRandomMatrix(currentRank, 8, 0.9);
                 renderAll();
             };
-            
+
             // Reset button
             document.getElementById('reset-btn').onclick = () => {
                 W = generateRandomMatrix(8, 8, 1.5);
@@ -520,12 +714,13 @@
                 alphaValue.textContent = '1.5';
                 renderAll();
             };
-            
+
             // Initial render
             renderAll();
         }
-        
+
         window.onload = init;
     </script>
 </body>
+
 </html>
